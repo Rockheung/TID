@@ -1,7 +1,7 @@
 <nav id="sidebar">
   <!-- Sidebar Header -->
   <div class="sidebar-header text-center">
-    <a href="/">
+    <a href="{{ base_url }}/">
       Sundry Codes
     </a>
   </div>
@@ -25,7 +25,7 @@
       <!-- Here would be better off instorucing my Info. -->
 
       <li class="active">
-        <a href="#categorySubmenu" data-toggle="collapse" aria-expanded="true">
+        <a href="{{ base_url }}#categorySubmenu" data-toggle="collapse" aria-expanded="true">
           Categories
         </a>
         <ul class="collapse in list-unstyled" id="categorySubmenu">
@@ -34,7 +34,7 @@
           {% if categories != empty %}
             {% for category in categories %}
               <li class="{% if page.categories contains category %}current{% endif %}">
-                <a href="/category/#{{ category }}"
+                <a href="{{ base_url }}/category/#{{ category }}"
                    title="Show all entries in {{ category }}">{{ category }}
                    <span class="label pull-right">
                      {% assign post_count = 0 %}
@@ -55,14 +55,14 @@
             {% endfor %}
           {% else %}
           <li class="">
-            <a href="#">No categories yet.</a>
+            <a href="{{ base_url }}#">No categories yet.</a>
           </li>
           {% endif %}
         </ul>
       </li>
 
       <li class="active">
-        <a href="#recententriesSubmenu" data-toggle="collapse" aria-expanded="true">
+        <a href="{{ base_url }}#recententriesSubmenu" data-toggle="collapse" aria-expanded="true">
           Recent posts
         </a>
         <ul class="collapse in list-unstyled" id="recententriesSubmenu">
@@ -72,19 +72,19 @@
                 {% break %}
               {% endif %}
               <li class="">
-                <a href="{{ post.url | absolute_url }}" title="{{ post.title }}" rel="bookmark">{{ post.title }}</a>
+                <a href="{{ base_url }}{{ post.url | absolute_url }}" title="{{ post.title }}" rel="bookmark">{{ post.title }}</a>
               </li>
             {% endfor %}
           {% else %}
             <li class="">
-              <a href="#">No posts yet.</a>
+              <a href="{{ base_url }}#">No posts yet.</a>
             </li>
           {% endif %}
         </ul>
       </li>
 
       <li class="active">
-        <a href="#tagcloudSubmenu" data-toggle="collapse" aria-expanded="true">
+        <a href="{{ base_url }}#tagcloudSubmenu" data-toggle="collapse" aria-expanded="true">
           Tags
         </a>
         {% assign lists_tags = site.posts | map: "tags" %}
@@ -101,7 +101,7 @@
               {% endfor %}
 
               <li>
-                <a href="/tag/#{{ tag }}"
+                <a href="{{ base_url }}/tag/#{{ tag }}"
                    title="{% case post_count %}
                             {% when 0 %}No post
                             {% when 1 %}{{ post_count }} post tagged by {{ tag }}
@@ -120,7 +120,7 @@
 
 
       <li class="active">
-        <a href="#recentcomments" data-toggle="collapse" aria-expanded="true">
+        <a href="{{ base_url }}#recentcomments" data-toggle="collapse" aria-expanded="true">
           Recent comments
         </a>
         <div id="recentcomments" class="dsq-widget collapse in"><script type="text/javascript" src="https://sundry-rockheung.disqus.com/recent_comments_widget.js?num_items=5&hide_avatars=1&avatar_size=32&excerpt_length=200"></script></div>
