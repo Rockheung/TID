@@ -1,0 +1,1189 @@
+<!DOCTYPE html>
+<html lang="en">
+
+  <head>
+  <meta charset="utf-8">
+  <title>SUNDRYCODES - 
+      3. Django 시작하기
+    </title>
+  <meta name="robots" content="follow, all">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1, user-scalable=0">
+  <meta name="description" content="짤막한, 아니면 기억하고 싶은 잡스런 코드나 약간의 주절거림이 있는 개인 블로그입니다.">
+  <meta name="keywords" content="ARM-server, Alibabacloud, BeagleBone-Black, D2-coding, Django, EACCES, IPTV, L2TP, Linode, Python, Regular-Expressions, SSH, Sqlite, VPN, VPS, atom, basic, baytrail, eMMC, elm, error, git, github.io, ip우회, mailprogramming, mmcblk, mmcblkXbootY, monospace, pip, pip2, pip3, reset, rollback, server, tvheadend, ubuntu, virtualenv, virtualenvwrapper, webfont, x86-안드로이드, 개인서버, 고정폭, 관리자페이지, 깃허브페이지, 도커, 레노버, 린노드, 막힌사이트뚫기, 매일프로그래밍, 부트파티션, 쓰기해제, 안드로이드-태블릿, 알리바바클라우드, 앱-재정의, 엘름, 오류, 웹폰트, 이벤트-당첨, 장고, 저전력서버, 정규표현식, 정적파일, 첫글, 클라우드서버, 터미널, 파이썬">
+  <meta name="author" content="Rockheung">
+  <link rel="pingback" href="/xmlrpc/">
+  <link rel="home" href="/">
+
+  <!-- Scrollbar Custom CSS -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/malihu-custom-scrollbar-plugin/3.1.5/jquery.mCustomScrollbar.min.css">
+
+  <!-- Latest compiled and minified CSS -->
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+
+  <!-- D2-coding webfont -->
+  <link href="https://cdn.jsdelivr.net/gh/joungkyun/font-d2coding/d2coding.css" rel="stylesheet" type="text/css">
+  <link href="https://fonts.googleapis.com/css?family=Monofett|Zilla+Slab+Highlight:700" rel="stylesheet">
+
+  <!--[if lt IE 9]>
+    <script src="/assets/js/html5shiv.js"></script>
+    <script src="/assets/js/respond.min.js"></script>
+  <![endif]-->
+
+  <!-- Generarted by https://www.favicon-generator.org -->
+  <link rel="shortcut icon" href="/assets/ico/favicon.ico">
+  <link rel="apple-touch-icon" sizes="57x57" href="/assets/ico/apple-icon-57x57.png">
+  <link rel="apple-touch-icon" sizes="60x60" href="/assets/ico/apple-icon-60x60.png">
+  <link rel="apple-touch-icon" sizes="72x72" href="/assets/ico/apple-icon-72x72.png">
+  <link rel="apple-touch-icon" sizes="76x76" href="/assets/ico/apple-icon-72x72.png">
+  <link rel="apple-touch-icon" sizes="114x114" href="/assets/ico/apple-icon-144x144.png">
+  <link rel="apple-touch-icon" sizes="120x120" href="/assets/ico/apple-icon-120x120.png">
+  <link rel="apple-touch-icon" sizes="144x144" href="/assets/ico/apple-icon-144x144.png">
+  <link rel="apple-touch-icon" sizes="152x152" href="/assets/ico/apple-icon-152x152.png">
+  <link rel="apple-touch-icon" sizes="180x180" href="/assets/ico/apple-icon-180x180.png">
+  <link rel="icon" type="image/png" sizes="192x192"  href="/assets/ico/android-icon-192x192.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/assets/ico/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="96x96" href="/assets/ico/favicon-96x96.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/assets/ico/favicon-16x16.png">
+  <link rel="manifest" href="/assets/ico/manifest.json">
+  <meta name="msapplication-TileColor" content="#FFFFFF">
+  <meta name="msapplication-TileImage" content="/assets/ico/ms-icon-144x144.png">
+  <meta name="theme-color" content="#FFFFFF">
+
+  <link href="https://fonts.googleapis.com/css?family=Nanum+Gothic|Nanum+Myeongjo" rel="stylesheet">
+
+  <link rel="stylesheet" href="/assets/main.css" type="text/css">
+</head>
+
+
+  <body>
+    <div class="container-fluid">
+  <div id="banner" class="hidden-xs col-sm-12">
+    <a href="http://plex.rockheung.xyz" target="_blank">
+      <img src="https://res.cloudinary.com/rockheung/image/upload/v1518684835/plex-logo_cn5za9.png"/>
+    </a>
+  </div>
+</div>
+
+
+
+    <div class="wrapper">
+      <nav id="sidebar">
+  <!-- Sidebar Header -->
+  <div class="sidebar-header text-center">
+    <a href="/">
+      Sundry Codes
+    </a>
+  </div>
+
+  <div class="sidebar-search visible-xs">
+    <div class="col-xs-12">
+      <form action="" class="search-form">
+        <div class="form-group has-feedback">
+          <label for="search" class="sr-only">Search</label>
+          <input type="text" class="search-query form-control" placeholder="Search" name="pattern" value="pattern" >
+          <span class="glyphicon glyphicon-search form-control-feedback"></span>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <!-- Sidebar Links -->
+  <div class="container">
+
+    <ul class="list-unstyled components">
+      <!-- Here would be better off instorucing my Info. -->
+
+      <li class="active">
+        <a href="#categorySubmenu" data-toggle="collapse" aria-expanded="true">
+          Categories
+        </a>
+        <ul class="collapse in list-unstyled" id="categorySubmenu">
+          
+          
+          
+            
+              <li class="current">
+                <a href="/category/#django"
+                   title="Show all entries in django">django
+                   <span class="label pull-right">
+                     
+                     
+
+                     6 posts
+                     
+                   </span>
+                </a>
+              </li>
+            
+              <li class="">
+                <a href="/category/#study"
+                   title="Show all entries in study">study
+                   <span class="label pull-right">
+                     
+                     
+
+                     8 posts
+                     
+                   </span>
+                </a>
+              </li>
+            
+              <li class="">
+                <a href="/category/#매일프로그래밍"
+                   title="Show all entries in 매일프로그래밍">매일프로그래밍
+                   <span class="label pull-right">
+                     
+                     
+
+                     10 posts
+                     
+                   </span>
+                </a>
+              </li>
+            
+              <li class="">
+                <a href="/category/#서버"
+                   title="Show all entries in 서버">서버
+                   <span class="label pull-right">
+                     
+                     
+
+                     2 posts
+                     
+                   </span>
+                </a>
+              </li>
+            
+              <li class="">
+                <a href="/category/#일상"
+                   title="Show all entries in 일상">일상
+                   <span class="label pull-right">
+                     
+                     
+
+                     8 posts
+                     
+                   </span>
+                </a>
+              </li>
+            
+          
+        </ul>
+      </li>
+
+      <li class="active">
+        <a href="#recententriesSubmenu" data-toggle="collapse" aria-expanded="true">
+          Recent posts
+        </a>
+        <ul class="collapse in list-unstyled" id="recententriesSubmenu">
+          
+            
+              
+              <li class="">
+                <a href="http://localhost:4000/%EB%A7%A4%EC%9D%BC%ED%94%84%EB%A1%9C%EA%B7%B8%EB%9E%98%EB%B0%8D/2018/08/21/%EB%A7%A4%EC%9D%BC%ED%94%84%EB%A1%9C%EA%B7%B8%EB%9E%98%EB%B0%8D-%EC%8B%A4%EB%A6%AC%EC%BD%98%EB%B0%B8%EB%A6%AC-%ED%8C%A8%ED%82%A4%EC%A7%80-%EB%AC%B8%EC%A0%9C-10.html" title="매일프로그래밍 실리콘밸리 패키지 문제 10" rel="bookmark">매일프로그래밍 실리콘밸리 패키지 문제 10</a>
+              </li>
+            
+              
+              <li class="">
+                <a href="http://localhost:4000/%EB%A7%A4%EC%9D%BC%ED%94%84%EB%A1%9C%EA%B7%B8%EB%9E%98%EB%B0%8D/2018/08/20/%EB%A7%A4%EC%9D%BC%ED%94%84%EB%A1%9C%EA%B7%B8%EB%9E%98%EB%B0%8D-%EC%8B%A4%EB%A6%AC%EC%BD%98%EB%B0%B8%EB%A6%AC-%ED%8C%A8%ED%82%A4%EC%A7%80-%EB%AC%B8%EC%A0%9C-9.html" title="매일프로그래밍 실리콘밸리 패키지 문제 9" rel="bookmark">매일프로그래밍 실리콘밸리 패키지 문제 9</a>
+              </li>
+            
+              
+              <li class="">
+                <a href="http://localhost:4000/%EB%A7%A4%EC%9D%BC%ED%94%84%EB%A1%9C%EA%B7%B8%EB%9E%98%EB%B0%8D/2018/08/20/%EB%A7%A4%EC%9D%BC%ED%94%84%EB%A1%9C%EA%B7%B8%EB%9E%98%EB%B0%8D-%EC%8B%A4%EB%A6%AC%EC%BD%98%EB%B0%B8%EB%A6%AC-%ED%8C%A8%ED%82%A4%EC%A7%80-%EB%AC%B8%EC%A0%9C-8.html" title="매일프로그래밍 실리콘밸리 패키지 문제 8" rel="bookmark">매일프로그래밍 실리콘밸리 패키지 문제 8</a>
+              </li>
+            
+              
+              <li class="">
+                <a href="http://localhost:4000/%EB%A7%A4%EC%9D%BC%ED%94%84%EB%A1%9C%EA%B7%B8%EB%9E%98%EB%B0%8D/2018/08/20/%EB%A7%A4%EC%9D%BC%ED%94%84%EB%A1%9C%EA%B7%B8%EB%9E%98%EB%B0%8D-%EC%8B%A4%EB%A6%AC%EC%BD%98%EB%B0%B8%EB%A6%AC-%ED%8C%A8%ED%82%A4%EC%A7%80-%EB%AC%B8%EC%A0%9C-7.html" title="매일프로그래밍 실리콘밸리 패키지 문제 7" rel="bookmark">매일프로그래밍 실리콘밸리 패키지 문제 7</a>
+              </li>
+            
+              
+              <li class="">
+                <a href="http://localhost:4000/%EB%A7%A4%EC%9D%BC%ED%94%84%EB%A1%9C%EA%B7%B8%EB%9E%98%EB%B0%8D/2018/08/19/%EB%A7%A4%EC%9D%BC%ED%94%84%EB%A1%9C%EA%B7%B8%EB%9E%98%EB%B0%8D-%EC%8B%A4%EB%A6%AC%EC%BD%98%EB%B0%B8%EB%A6%AC-%ED%8C%A8%ED%82%A4%EC%A7%80-%EB%AC%B8%EC%A0%9C-6.html" title="매일프로그래밍 실리콘밸리 패키지 문제 6" rel="bookmark">매일프로그래밍 실리콘밸리 패키지 문제 6</a>
+              </li>
+            
+              
+              <li class="">
+                <a href="http://localhost:4000/%EB%A7%A4%EC%9D%BC%ED%94%84%EB%A1%9C%EA%B7%B8%EB%9E%98%EB%B0%8D/2018/08/16/%EB%A7%A4%EC%9D%BC%ED%94%84%EB%A1%9C%EA%B7%B8%EB%9E%98%EB%B0%8D-%EC%8B%A4%EB%A6%AC%EC%BD%98%EB%B0%B8%EB%A6%AC-%ED%8C%A8%ED%82%A4%EC%A7%80-%EB%AC%B8%EC%A0%9C-5.html" title="매일프로그래밍 실리콘밸리 패키지 문제 5" rel="bookmark">매일프로그래밍 실리콘밸리 패키지 문제 5</a>
+              </li>
+            
+              
+              <li class="">
+                <a href="http://localhost:4000/%EB%A7%A4%EC%9D%BC%ED%94%84%EB%A1%9C%EA%B7%B8%EB%9E%98%EB%B0%8D/2018/08/16/%EB%A7%A4%EC%9D%BC%ED%94%84%EB%A1%9C%EA%B7%B8%EB%9E%98%EB%B0%8D-%EC%8B%A4%EB%A6%AC%EC%BD%98%EB%B0%B8%EB%A6%AC-%ED%8C%A8%ED%82%A4%EC%A7%80-%EB%AC%B8%EC%A0%9C-4.html" title="매일프로그래밍 실리콘밸리 패키지 문제 4" rel="bookmark">매일프로그래밍 실리콘밸리 패키지 문제 4</a>
+              </li>
+            
+              
+              <li class="">
+                <a href="http://localhost:4000/%EB%A7%A4%EC%9D%BC%ED%94%84%EB%A1%9C%EA%B7%B8%EB%9E%98%EB%B0%8D/2018/08/16/%EB%A7%A4%EC%9D%BC%ED%94%84%EB%A1%9C%EA%B7%B8%EB%9E%98%EB%B0%8D-%EC%8B%A4%EB%A6%AC%EC%BD%98%EB%B0%B8%EB%A6%AC-%ED%8C%A8%ED%82%A4%EC%A7%80-%EB%AC%B8%EC%A0%9C-3.html" title="매일프로그래밍 실리콘밸리 패키지 문제 3" rel="bookmark">매일프로그래밍 실리콘밸리 패키지 문제 3</a>
+              </li>
+            
+              
+              <li class="">
+                <a href="http://localhost:4000/%EB%A7%A4%EC%9D%BC%ED%94%84%EB%A1%9C%EA%B7%B8%EB%9E%98%EB%B0%8D/2018/08/16/%EB%A7%A4%EC%9D%BC%ED%94%84%EB%A1%9C%EA%B7%B8%EB%9E%98%EB%B0%8D-%EC%8B%A4%EB%A6%AC%EC%BD%98%EB%B0%B8%EB%A6%AC-%ED%8C%A8%ED%82%A4%EC%A7%80-%EB%AC%B8%EC%A0%9C-2.html" title="매일프로그래밍 실리콘밸리 패키지 문제 2" rel="bookmark">매일프로그래밍 실리콘밸리 패키지 문제 2</a>
+              </li>
+            
+              
+              <li class="">
+                <a href="http://localhost:4000/%EB%A7%A4%EC%9D%BC%ED%94%84%EB%A1%9C%EA%B7%B8%EB%9E%98%EB%B0%8D/2018/08/15/%EB%A7%A4%EC%9D%BC%ED%94%84%EB%A1%9C%EA%B7%B8%EB%9E%98%EB%B0%8D-%EC%8B%A4%EB%A6%AC%EC%BD%98%EB%B0%B8%EB%A6%AC-%ED%8C%A8%ED%82%A4%EC%A7%80-%EB%AC%B8%EC%A0%9C-1.html" title="매일프로그래밍 - 실리콘밸리 패키지 문제 1" rel="bookmark">매일프로그래밍 - 실리콘밸리 패키지 문제 1</a>
+              </li>
+            
+              
+                
+          
+        </ul>
+      </li>
+
+      <li class="active">
+        <a href="#tagcloudSubmenu" data-toggle="collapse" aria-expanded="true">
+          Tags
+        </a>
+        
+        
+        
+        <ul id="tagcloudSubmenu" class="callapse in list-unstyled tag-cloud">
+          
+            
+              
+              
+
+              <li>
+                <a href="/tag/#ARM-server"
+                   title="1 post tagged by ARM-server
+                            "
+                   class="tag-1">ARM-server</a>
+              </li>
+            
+              
+              
+
+              <li>
+                <a href="/tag/#Alibabacloud"
+                   title="1 post tagged by Alibabacloud
+                            "
+                   class="tag-1">Alibabacloud</a>
+              </li>
+            
+              
+              
+
+              <li>
+                <a href="/tag/#BeagleBone-Black"
+                   title="1 post tagged by BeagleBone-Black
+                            "
+                   class="tag-1">BeagleBone-Black</a>
+              </li>
+            
+              
+              
+
+              <li>
+                <a href="/tag/#D2-coding"
+                   title="1 post tagged by D2-coding
+                            "
+                   class="tag-1">D2-coding</a>
+              </li>
+            
+              
+              
+
+              <li>
+                <a href="/tag/#Django"
+                   title="4 posts tagged by Django
+                          "
+                   class="tag-5">Django</a>
+              </li>
+            
+              
+              
+
+              <li>
+                <a href="/tag/#EACCES"
+                   title="1 post tagged by EACCES
+                            "
+                   class="tag-1">EACCES</a>
+              </li>
+            
+              
+              
+
+              <li>
+                <a href="/tag/#IPTV"
+                   title="2 posts tagged by IPTV
+                          "
+                   class="tag-2">IPTV</a>
+              </li>
+            
+              
+              
+
+              <li>
+                <a href="/tag/#L2TP"
+                   title="1 post tagged by L2TP
+                            "
+                   class="tag-1">L2TP</a>
+              </li>
+            
+              
+              
+
+              <li>
+                <a href="/tag/#Linode"
+                   title="1 post tagged by Linode
+                            "
+                   class="tag-1">Linode</a>
+              </li>
+            
+              
+              
+
+              <li>
+                <a href="/tag/#Python"
+                   title="4 posts tagged by Python
+                          "
+                   class="tag-5">Python</a>
+              </li>
+            
+              
+              
+
+              <li>
+                <a href="/tag/#Regular-Expressions"
+                   title="1 post tagged by Regular-Expressions
+                            "
+                   class="tag-1">Regular-Expressions</a>
+              </li>
+            
+              
+              
+
+              <li>
+                <a href="/tag/#SSH"
+                   title="1 post tagged by SSH
+                            "
+                   class="tag-1">SSH</a>
+              </li>
+            
+              
+              
+
+              <li>
+                <a href="/tag/#Sqlite"
+                   title="1 post tagged by Sqlite
+                            "
+                   class="tag-1">Sqlite</a>
+              </li>
+            
+              
+              
+
+              <li>
+                <a href="/tag/#VPN"
+                   title="1 post tagged by VPN
+                            "
+                   class="tag-1">VPN</a>
+              </li>
+            
+              
+              
+
+              <li>
+                <a href="/tag/#VPS"
+                   title="1 post tagged by VPS
+                            "
+                   class="tag-1">VPS</a>
+              </li>
+            
+              
+              
+
+              <li>
+                <a href="/tag/#atom"
+                   title="1 post tagged by atom
+                            "
+                   class="tag-1">atom</a>
+              </li>
+            
+              
+              
+
+              <li>
+                <a href="/tag/#basic"
+                   title="1 post tagged by basic
+                            "
+                   class="tag-1">basic</a>
+              </li>
+            
+              
+              
+
+              <li>
+                <a href="/tag/#baytrail"
+                   title="1 post tagged by baytrail
+                            "
+                   class="tag-1">baytrail</a>
+              </li>
+            
+              
+              
+
+              <li>
+                <a href="/tag/#eMMC"
+                   title="1 post tagged by eMMC
+                            "
+                   class="tag-1">eMMC</a>
+              </li>
+            
+              
+              
+
+              <li>
+                <a href="/tag/#elm"
+                   title="1 post tagged by elm
+                            "
+                   class="tag-1">elm</a>
+              </li>
+            
+              
+              
+
+              <li>
+                <a href="/tag/#error"
+                   title="1 post tagged by error
+                            "
+                   class="tag-1">error</a>
+              </li>
+            
+              
+              
+
+              <li>
+                <a href="/tag/#git"
+                   title="2 posts tagged by git
+                          "
+                   class="tag-2">git</a>
+              </li>
+            
+              
+              
+
+              <li>
+                <a href="/tag/#github.io"
+                   title="1 post tagged by github.io
+                            "
+                   class="tag-1">github.io</a>
+              </li>
+            
+              
+              
+
+              <li>
+                <a href="/tag/#ip우회"
+                   title="1 post tagged by ip우회
+                            "
+                   class="tag-1">ip우회</a>
+              </li>
+            
+              
+              
+
+              <li>
+                <a href="/tag/#mailprogramming"
+                   title="10 posts tagged by mailprogramming
+                          "
+                   class="tag-13">mailprogramming</a>
+              </li>
+            
+              
+              
+
+              <li>
+                <a href="/tag/#mmcblk"
+                   title="1 post tagged by mmcblk
+                            "
+                   class="tag-1">mmcblk</a>
+              </li>
+            
+              
+              
+
+              <li>
+                <a href="/tag/#mmcblkXbootY"
+                   title="1 post tagged by mmcblkXbootY
+                            "
+                   class="tag-1">mmcblkXbootY</a>
+              </li>
+            
+              
+              
+
+              <li>
+                <a href="/tag/#monospace"
+                   title="1 post tagged by monospace
+                            "
+                   class="tag-1">monospace</a>
+              </li>
+            
+              
+              
+
+              <li>
+                <a href="/tag/#pip"
+                   title="1 post tagged by pip
+                            "
+                   class="tag-1">pip</a>
+              </li>
+            
+              
+              
+
+              <li>
+                <a href="/tag/#pip2"
+                   title="1 post tagged by pip2
+                            "
+                   class="tag-1">pip2</a>
+              </li>
+            
+              
+              
+
+              <li>
+                <a href="/tag/#pip3"
+                   title="1 post tagged by pip3
+                            "
+                   class="tag-1">pip3</a>
+              </li>
+            
+              
+              
+
+              <li>
+                <a href="/tag/#reset"
+                   title="1 post tagged by reset
+                            "
+                   class="tag-1">reset</a>
+              </li>
+            
+              
+              
+
+              <li>
+                <a href="/tag/#rollback"
+                   title="1 post tagged by rollback
+                            "
+                   class="tag-1">rollback</a>
+              </li>
+            
+              
+              
+
+              <li>
+                <a href="/tag/#server"
+                   title="1 post tagged by server
+                            "
+                   class="tag-1">server</a>
+              </li>
+            
+              
+              
+
+              <li>
+                <a href="/tag/#tvheadend"
+                   title="2 posts tagged by tvheadend
+                          "
+                   class="tag-2">tvheadend</a>
+              </li>
+            
+              
+              
+
+              <li>
+                <a href="/tag/#ubuntu"
+                   title="1 post tagged by ubuntu
+                            "
+                   class="tag-1">ubuntu</a>
+              </li>
+            
+              
+              
+
+              <li>
+                <a href="/tag/#virtualenv"
+                   title="2 posts tagged by virtualenv
+                          "
+                   class="tag-2">virtualenv</a>
+              </li>
+            
+              
+              
+
+              <li>
+                <a href="/tag/#virtualenvwrapper"
+                   title="2 posts tagged by virtualenvwrapper
+                          "
+                   class="tag-2">virtualenvwrapper</a>
+              </li>
+            
+              
+              
+
+              <li>
+                <a href="/tag/#webfont"
+                   title="1 post tagged by webfont
+                            "
+                   class="tag-1">webfont</a>
+              </li>
+            
+              
+              
+
+              <li>
+                <a href="/tag/#x86-안드로이드"
+                   title="1 post tagged by x86-안드로이드
+                            "
+                   class="tag-1">x86-안드로이드</a>
+              </li>
+            
+              
+              
+
+              <li>
+                <a href="/tag/#개인서버"
+                   title="1 post tagged by 개인서버
+                            "
+                   class="tag-1">개인서버</a>
+              </li>
+            
+              
+              
+
+              <li>
+                <a href="/tag/#고정폭"
+                   title="1 post tagged by 고정폭
+                            "
+                   class="tag-1">고정폭</a>
+              </li>
+            
+              
+              
+
+              <li>
+                <a href="/tag/#관리자페이지"
+                   title="1 post tagged by 관리자페이지
+                            "
+                   class="tag-1">관리자페이지</a>
+              </li>
+            
+              
+              
+
+              <li>
+                <a href="/tag/#깃허브페이지"
+                   title="1 post tagged by 깃허브페이지
+                            "
+                   class="tag-1">깃허브페이지</a>
+              </li>
+            
+              
+              
+
+              <li>
+                <a href="/tag/#도커"
+                   title="1 post tagged by 도커
+                            "
+                   class="tag-1">도커</a>
+              </li>
+            
+              
+              
+
+              <li>
+                <a href="/tag/#레노버"
+                   title="1 post tagged by 레노버
+                            "
+                   class="tag-1">레노버</a>
+              </li>
+            
+              
+              
+
+              <li>
+                <a href="/tag/#린노드"
+                   title="1 post tagged by 린노드
+                            "
+                   class="tag-1">린노드</a>
+              </li>
+            
+              
+              
+
+              <li>
+                <a href="/tag/#막힌사이트뚫기"
+                   title="1 post tagged by 막힌사이트뚫기
+                            "
+                   class="tag-1">막힌사이트뚫기</a>
+              </li>
+            
+              
+              
+
+              <li>
+                <a href="/tag/#매일프로그래밍"
+                   title="10 posts tagged by 매일프로그래밍
+                          "
+                   class="tag-13">매일프로그래밍</a>
+              </li>
+            
+              
+              
+
+              <li>
+                <a href="/tag/#부트파티션"
+                   title="1 post tagged by 부트파티션
+                            "
+                   class="tag-1">부트파티션</a>
+              </li>
+            
+              
+              
+
+              <li>
+                <a href="/tag/#쓰기해제"
+                   title="1 post tagged by 쓰기해제
+                            "
+                   class="tag-1">쓰기해제</a>
+              </li>
+            
+              
+              
+
+              <li>
+                <a href="/tag/#안드로이드-태블릿"
+                   title="1 post tagged by 안드로이드-태블릿
+                            "
+                   class="tag-1">안드로이드-태블릿</a>
+              </li>
+            
+              
+              
+
+              <li>
+                <a href="/tag/#알리바바클라우드"
+                   title="1 post tagged by 알리바바클라우드
+                            "
+                   class="tag-1">알리바바클라우드</a>
+              </li>
+            
+              
+              
+
+              <li>
+                <a href="/tag/#앱-재정의"
+                   title="1 post tagged by 앱-재정의
+                            "
+                   class="tag-1">앱-재정의</a>
+              </li>
+            
+              
+              
+
+              <li>
+                <a href="/tag/#엘름"
+                   title="1 post tagged by 엘름
+                            "
+                   class="tag-1">엘름</a>
+              </li>
+            
+              
+              
+
+              <li>
+                <a href="/tag/#오류"
+                   title="1 post tagged by 오류
+                            "
+                   class="tag-1">오류</a>
+              </li>
+            
+              
+              
+
+              <li>
+                <a href="/tag/#웹폰트"
+                   title="1 post tagged by 웹폰트
+                            "
+                   class="tag-1">웹폰트</a>
+              </li>
+            
+              
+              
+
+              <li>
+                <a href="/tag/#이벤트-당첨"
+                   title="1 post tagged by 이벤트-당첨
+                            "
+                   class="tag-1">이벤트-당첨</a>
+              </li>
+            
+              
+              
+
+              <li>
+                <a href="/tag/#장고"
+                   title="3 posts tagged by 장고
+                          "
+                   class="tag-3">장고</a>
+              </li>
+            
+              
+              
+
+              <li>
+                <a href="/tag/#저전력서버"
+                   title="1 post tagged by 저전력서버
+                            "
+                   class="tag-1">저전력서버</a>
+              </li>
+            
+              
+              
+
+              <li>
+                <a href="/tag/#정규표현식"
+                   title="1 post tagged by 정규표현식
+                            "
+                   class="tag-1">정규표현식</a>
+              </li>
+            
+              
+              
+
+              <li>
+                <a href="/tag/#정적파일"
+                   title="1 post tagged by 정적파일
+                            "
+                   class="tag-1">정적파일</a>
+              </li>
+            
+              
+              
+
+              <li>
+                <a href="/tag/#첫글"
+                   title="1 post tagged by 첫글
+                            "
+                   class="tag-1">첫글</a>
+              </li>
+            
+              
+              
+
+              <li>
+                <a href="/tag/#클라우드서버"
+                   title="1 post tagged by 클라우드서버
+                            "
+                   class="tag-1">클라우드서버</a>
+              </li>
+            
+              
+              
+
+              <li>
+                <a href="/tag/#터미널"
+                   title="1 post tagged by 터미널
+                            "
+                   class="tag-1">터미널</a>
+              </li>
+            
+              
+              
+
+              <li>
+                <a href="/tag/#파이썬"
+                   title="5 posts tagged by 파이썬
+                          "
+                   class="tag-6">파이썬</a>
+              </li>
+            
+          
+        </ul>
+      </li>
+
+
+      <li class="active">
+        <a href="#recentcomments" data-toggle="collapse" aria-expanded="true">
+          Recent comments
+        </a>
+        <div id="recentcomments" class="dsq-widget collapse in"><script type="text/javascript" src="https://sundry-rockheung.disqus.com/recent_comments_widget.js?num_items=5&hide_avatars=1&avatar_size=32&excerpt_length=200"></script></div>
+      </li>
+
+    </ul>
+  </div>
+</nav>
+
+
+
+      <div id="content">
+        <nav class="navbar" role="navigation">
+	<div class="container-fluid">
+		<div class="navbar-header">
+		</div>
+
+		<div class="container-fluid">
+			<div class="row">
+
+				<!-- toggle button -->
+				<div class="col-xs-2 col-sm-3">
+					<button type="button" id="sidebarCollapse" class="btn navbar-btn">
+						<span class="sr-only">Toggle navigation</span>
+						<i class="glyphicon glyphicon-align-left"></i>
+					</button>
+				</div>
+
+				<div class="visible-xs col-xs-2 col-xs-push-8">
+					<div class="pull-right">
+						<a href="/" title="Rockheung's Sundry" class="navbar-brand" rel="home">
+              <img src="/assets/ico/home.png" class="img-rounded home-img" alt="Rockheung's Sundry" >
+						</a>
+					</div>
+				</div>
+
+				<div class="hidden-xs col-sm-6">
+					<div class="col-sm-12 text-center">
+						<a href="/" title="Rockheung's Sundry" class="navbar-brand aps-pos" rel="home">
+              <img src="/assets/ico/home.png" class="img-rounded home-img" alt="Rockheung's Sundry" >
+						</a>
+					</div>
+				</div>
+
+				<div class="clearfix visible-xs"></div>
+
+				<div class="col-xs-12 col-sm-3 hidden-xs">
+					<form class="search-form" method="get" action="http://www.google.com/search" target="_blank" >
+						<div class="form-group has-feedback">
+							<label for="search" class="sr-only">Search</label>
+              <input type="hidden" name="sitesearch" value="http://localhost:4000">
+							<input class="search-query form-control" type="text" name="q" maxlength="255" placeholder="Search" value="">
+							<span class="glyphicon glyphicon-search form-control-feedback"></span>
+						</div>
+					</form>
+				</div>
+			</div>
+
+		</div>
+	</div>
+</nav>
+
+
+
+        <div class="container-fluid">
+          <div class="row">
+            <div class="col-xs-11 col-xs-push-1 col-sm-10 col-sm-push-1 col-md-8 col-md-push-2 col-lg-6 col-lg-push-3">
+              <div class="breadcrumbs">
+  <ul class="breadcrumb">
+    
+    
+    
+    <li class="deactive">
+          Post
+      </li>
+    
+    <li class="deactive">
+          2018
+      </li>
+    
+    <li class="deactive">
+          Mar
+      </li>
+    
+    <li class="deactive">
+          2
+      </li>
+    
+    <li >
+          3. Django 시작하기
+      </li>
+    
+  </ul>
+</div>
+
+
+              <article class="post h-entry" itemscope itemtype="http://schema.org/BlogPosting">
+
+  <header class="post-header">
+    <h1 class="post-title p-name" itemprop="name headline">3. Django 시작하기</h1>
+    <span class="post-tags">
+      [&nbsp;
+      
+        
+        <a class="no-underline" href="/tag/#Python"><code class="highligher-rouge"><nobr>Python</nobr></code>&nbsp;</a>
+      
+        
+        <a class="no-underline" href="/tag/#virtualenv"><code class="highligher-rouge"><nobr>virtualenv</nobr></code>&nbsp;</a>
+      
+        
+        <a class="no-underline" href="/tag/#virtualenvwrapper"><code class="highligher-rouge"><nobr>virtualenvwrapper</nobr></code>&nbsp;</a>
+      
+        
+        <a class="no-underline" href="/tag/#파이썬"><code class="highligher-rouge"><nobr>파이썬</nobr></code>&nbsp;</a>
+      
+        
+        <a class="no-underline" href="/tag/#장고"><code class="highligher-rouge"><nobr>장고</nobr></code>&nbsp;</a>
+      
+        
+        <a class="no-underline" href="/tag/#Django"><code class="highligher-rouge"><nobr>Django</nobr></code>&nbsp;</a>
+      
+      ]
+    </span>
+    <p class="post-meta">
+      <time class="dt-published" datetime="2018-03-02T11:08:44+09:00" itemprop="datePublished">
+        
+        Mar 2, 2018
+      </time>
+      </p>
+  </header>
+
+  <div class="post-content e-content" itemprop="articleBody">
+    <h3 id="이-글에서는-django를-사용할-가상환경을-만들고-프로젝트-및-앱-생성까지-진행한다">이 글에서는 Django를 사용할 가상환경을 만들고 프로젝트 및 앱 생성까지 진행한다.</h3>
+
+<hr />
+
+<p>일단 Django 개발에 사용할 파이썬 가상 환경을 만들자. 이전 글에서 virtualenvwrapper를 설치하였으므로, 같은 환경이라고 가정하겠다.</p>
+
+<p>터미널을 띄우고 <code class="highlighter-rouge">mkvirtualenv</code> 를 이용해서 가상환경을 생성한다.</p>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>$ mkvirtualenv django-blog -p python3 &lt;!--more--&gt;
+</code></pre></div></div>
+
+<p>파이썬 3 버전이 기본인 가상 환경이다. 이후 모든 <code class="highlighter-rouge">python</code> 키워드는 <code class="highlighter-rouge">python3</code>을 가리킬 것이다. 실제로 <code class="highlighter-rouge">~/.virtualenvs/django-blog/bin/</code> 경로에 가보면 <code class="highlighter-rouge">python</code> 심볼릭 링크가 <code class="highlighter-rouge">python3</code>으로 연결되어 있음을 확인할 수 있다.</p>
+
+<p>물론 가상환경 이름과는 다르게 아직 이 환경에 설치된 파이썬 패키지를 보면 Django는 없는 것을 확인할 수 있다.</p>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>$ pip list
+EPRECATION: The default ....
+pip (9.0.1)
+setuptools (38.5.1)
+wheel (0.30.0)
+</code></pre></div></div>
+
+<p>이제 Django를 다음 명령어를 날려 설치하자.</p>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>$ pip install django
+</code></pre></div></div>
+
+<p>이후 <code class="highlighter-rouge">pip list</code>를 날리면 장고 패키지가 설치된 것을 확인할 수 있다.</p>
+
+<hr />
+
+<p>이제 장고 프로젝트를 새로 만들면 된다. 여기서 주의할 점이 있다. 파이썬 코드가 웹서버의 DocumentRoot에 위치하는 것은 권장하지 않는다(출처:<a href="https://docs.djangoproject.com/ko/2.0/intro/tutorial01/">docs.djangoproject.com</a>). 홈 폴더 등에 두면 좋을 것 같다.</p>
+
+<p>다음 명령어로 홈 경로에서 프로젝트 뼈대를 만들자. 물론 파이썬 가상환경이 활성화된 상태여야 한다. 안 되어 있다면 <code class="highlighter-rouge">workon django-blog</code> 명령어로 활성화시킨 후 진행하자.</p>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>$ workon django-blog
+$ django-admin startproject _base
+$ tree _base
+_base
+├── _base
+│   ├── __init__.py
+│   ├── settings.py
+│   ├── urls.py
+│   └── wsgi.py
+├── manage.py
+</code></pre></div></div>
+
+<p><code class="highlighter-rouge">tree</code>명령어가 없다면 다음 명령으로 설치할 수 있다.</p>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>$ sudo apt install tree          # Debian / Mint / Ubuntu Linux
+# yum install tree              # RHEL / CentOS / Fedora Linux
+</code></pre></div></div>
+
+<p>bash에서 $와 #의 차이는 루트 권한이냐 아니냐의 차이다. 궁금하면 지금 당장 <code class="highlighter-rouge">sudo -i</code>를 날려보자. root 유저로 쉘이 바뀌면서 $가 #으로 바뀔 것이다. 물론 뒤쪽 #은 주석처리된 것이다. 혹시 전부 복붙을 했는데 작동하지 않는다고 당황하지 말자. 주석에서 명시했듯이, 사용하는 리눅스의 계열에 따라 다른 명령어를 사용해야 한다. 자세한 내용은 <a href="https://namu.wiki/w/%EB%A6%AC%EB%88%85%EC%8A%A4#s-9">나무위키: 리눅스 베포판</a>에서 좀 더 알아볼 수 있겠다.</p>
+
+<p>새로운 프로젝트를 생성했다면 작동하는지 확인해보자.</p>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>$ python manage.py runserver
+Performing system checks...
+
+System check identified no issues (0 silenced).
+March 02, 2018 - 11:36:38
+Django version 2.0.2, using settings '_base.settings'
+Starting development server at http://127.0.0.1:8000/
+Quit the server with CONTROL-C.
+</code></pre></div></div>
+
+<p>현재 원격 서버가 아닌 로컬에서 작업하고 있다면, <a href="http://localhost:8000">이 링크</a>가 작동할 것이다. 안된다면 터미널에서 서버가 실행되는지 확인하고, 웹브라우저로 터미널에서 표시되는, http로 시작하는 주소에 접속해 보자.</p>
+
+<p>아무런 페이지를 작성하지 않았기 때문에 뭐가 뜰리 만무하다. 기본 Django 템플릿이 뜰 것이다. 다음과 같이 우주선이 출발하는 그림이 뜬다면 성공이다.</p>
+
+<p><a href="http://res.cloudinary.com/rockheung/image/upload/v1519992906/Screenshot_from_2018-03-02_20-39-33_eoccbe.png"><img src="http://res.cloudinary.com/rockheung/image/upload/v1519992906/Screenshot_from_2018-03-02_20-39-33_eoccbe.png" alt="" /></a></p>
+
+<p>권장되지는 않지만, 만약 로컬이 아니라 외부에서 접속할 수 있도록 하고 싶다면 다음과 같은 명령을 날리고 서버의 공인 아이피에 <code class="highlighter-rouge">8000</code>포트로 접근하면 된다.</p>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>$ python manage.py runserver 0:8000
+</code></pre></div></div>
+
+<p><em>절대로</em> 위와 같이 개발 서버만으로 상용 사이트를 운영하지 않기를 바란다. 어떤 보안 이슈가 있을지 알 수 없다. 장고는 개발을 위한 웹 프레임워크지, 웹 서버 툴이 아니다. 후에 다루겠지만, 개발이 완료되면 베포를 위해 nginx를 uwsgi에 연동하는 형태로 진행할 것이다.</p>
+
+<hr />
+
+<p>지금까지 프로젝트를 (정말 간단하게) 만들었다. 이제 여기에 실제 페이지를 구현하는데 사용할 앱을 작성해야 한다. 다음과 같은 명령으로 앱을 새롭게 생성하자. 물론 당연하게도, 프로젝트 폴더 안의 <code class="highlighter-rouge">manage.py</code>를 사용해야 한다.</p>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>$ python manage.py startapp blog
+$ tree blog
+blog
+├── admin.py
+├── apps.py
+├── __init__.py
+├── migrations
+│   └── __init__.py
+├── models.py
+├── tests.py
+└── views.py
+</code></pre></div></div>
+
+  </div>
+
+  
+
+  <a class="u-url" href="/django/2018/03/02/3-django-%EC%8B%9C%EC%9E%91%ED%95%98%EA%B8%B0.html" hidden></a>
+</article>
+
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+<!-- Latest compiled and minified JavaScript -->
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+<!-- jQuery Custom Scroller CDN -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/malihu-custom-scrollbar-plugin/3.1.5/jquery.mCustomScrollbar.concat.min.js"></script>
+<!-- Custom -->
+<script type="text/javascript">
+  $(document).ready(function () {
+
+    $("#sidebar").mCustomScrollbar({
+      theme: "minimal"
+    });
+
+    $('#sidebarCollapse').on('click', function () {
+      // open or close navbar
+      $('#sidebar, #content, #banner').toggleClass('active');
+      // close dropdowns
+      $('#sidebar.collapse.in').toggleClass('in');
+      // and also adjust aria-expanded attributes we use for the open/closed arrows
+      // in our CSS
+      $('.page-header').toggleClass('active');
+      //Custom for entry_title
+      $('a[aria-expanded=true]').attr('aria-expanded', 'false');
+    });
+
+  });
+</script>
+
+
+
+  </body>
+
+</html>
