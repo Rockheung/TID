@@ -34,7 +34,7 @@
           {% if categories != empty %}
             {% for category in categories %}
               <li class="{% if page.categories contains category %}current{% endif %}">
-                <a href="{{ base_url }}/category/#{{ category }}"
+                <a href="{{ "/category/" | relative_url }}#{{ category }}"
                    title="Show all entries in {{ category }}">{{ category }}
                    <span class="label pull-right">
                      {% assign post_count = 0 %}
